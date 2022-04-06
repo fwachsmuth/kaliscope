@@ -120,7 +120,7 @@ to get a working program. Please note that if you set a swap on a flash disk (sd
 
 This plugin helps in removing colored masks that can appear on you films negatives (often an orange mask).
 
-```scons colorMaskRemover```
+```scons colorNegInvert```
 
 ### 
 

@@ -37,7 +37,7 @@ incdir_tuttleHost = join(extern,'TuttleOfx/libraries/tuttle/src/')
 libdir_tuttleHost = join(extern,'TuttleOfx/build/libraries/tuttle/')
 
 compiler="clang"
-CXXFLAGS=['-Wno-deprecated-register', '-ftemplate-depth=256', '-std=c++11', '-stdlib=libc++', '-isysroot/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk']
-LINKFLAGS=['-stdlib=libc++','-Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk']
+CXXFLAGS=['-Wno-deprecated-register', '-ftemplate-depth=256', '-std=c++11', '-stdlib=libc++', '-isysroot/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk']
+LINKFLAGS=['-stdlib=libc++','-Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk']
 
 
