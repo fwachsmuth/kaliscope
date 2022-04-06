@@ -104,7 +104,7 @@ class KaliscopeMatchProject( SConsProject ):
             versions = self.retrieveOfxPluginVersions( os.path.join(self.getRealAbsoluteCwd(), mainFile) )
             pluginFilename = pluginName + '-' + str(versions[0]) + '.' + str(versions[1]) # eg. 'Foo-1.0'
             if self.env['mode'] == 'production' and versions[0] <= 0:
-                    print '''Don't create "''' + pluginFilename + '" in "production" mode.'
+                    print('''Don't create "''' + pluginFilename + '" in "production" mode.')
                     return None
 
             pluginInstall = self.SharedLibrary( pluginName,
