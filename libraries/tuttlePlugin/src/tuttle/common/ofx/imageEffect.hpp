@@ -85,7 +85,7 @@ inline std::size_t numberOfComponents( const EPixelComponent c )
 			return 0;
 		case ePixelComponentCustom:
 			BOOST_THROW_EXCEPTION( exception::Value()
-			    << exception::user() + "Can't retrieve the number of values inside a custom pixel component." );
+			    << exception::user( "Can't retrieve the number of values inside a custom pixel component." ) );
 	}
 	BOOST_ASSERT( false );
 	return 0;

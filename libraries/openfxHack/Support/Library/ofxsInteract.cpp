@@ -550,7 +550,7 @@ OfxStatus interactMainEntry( const char*          actionRaw,
 	{
 		std::cerr << tuttle::common::Color::get()->_error;
 		std::cerr << "__________" << std::endl;
-		if( const boost::error_info_sstream* const messageException = boost::get_error_info< tuttle::exception::user >(e) )
+		if( const std::string* const messageException = boost::get_error_info< tuttle::exception::user >(e) )
 		{
 			std::cerr << "Error: " << *messageException << std::endl;
 		}

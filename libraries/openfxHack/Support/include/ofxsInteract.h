@@ -192,7 +192,7 @@ public:
 	/** @brief virtual destructor */
 	virtual ~Interact() = 0;
 
-	bool verifyMagic() const { return this != NULL && _magic == kMagic; }
+	bool verifyMagic() const { return _magic == kMagic; }
 	
 	PropertySet& getProperties() { return _interactProperties; }
 

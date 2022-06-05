@@ -3,7 +3,7 @@
 #include <ofxsImageEffect.h>
 #include <ofxsMultiThread.h>
 
-#include <boost/gil/gil_all.hpp>
+#include <boost/gil.hpp>
 
 namespace tuttle {
 namespace plugin {

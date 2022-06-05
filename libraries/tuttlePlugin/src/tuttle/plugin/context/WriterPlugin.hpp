@@ -13,7 +13,7 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/numeric/conversion/cast.hpp>
 
-#include <boost/gil/gil_all.hpp>
+#include <boost/gil.hpp>
 
 #include <Sequence.hpp>
 
@@ -37,10 +37,12 @@ public:
 
 protected:
 	inline bool varyOnTime() const { return _isSequence; }
+	void updateSequence();
 
 private:
 	bool _isSequence;                            ///<
 	sequenceParser::Sequence _filePattern;               ///< Filename pattern manager
+	boost::filesystem::path _directory;
 
 	bool _oneRender;                            ///<
 	OfxTime _oneRenderAtTime;                         ///<
@@ -49,7 +51,7 @@ public:
 	std::string getAbsoluteFilenameAt( const OfxTime time ) const
 	{
 		if( _isSequence )
-			return _filePattern.getAbsoluteFilenameAt( boost::numeric_cast<sequenceParser::Time>(time) );
+			return ( _directory / _filePattern.getFilenameAt( boost::numeric_cast<sequenceParser::Time>(time) ) ).string();
 		else
 			return _paramFilepath->getValue();
 	}
@@ -59,7 +61,7 @@ public:
 		namespace bfs = boost::filesystem;
 		if( _isSequence )
 		{
-			return _filePattern.getAbsoluteDirectory().string();
+			return bfs::absolute(_directory).string();
 		}
 		else
 		{
@@ -70,8 +72,9 @@ public:
 
 	std::string getAbsoluteFirstFilename() const
 	{
+		namespace bfs = boost::filesystem;
 		if( _isSequence )
-			return _filePattern.getAbsoluteFirstFilename();
+			return ( bfs::absolute(_directory) / _filePattern.getFirstFilename() ).string();
 		else
 			return _paramFilepath->getValue();
 	}

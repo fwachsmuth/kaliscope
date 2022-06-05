@@ -8,7 +8,6 @@
 #include <terry/math/Rect.hpp>
 
 #include <boost/gil/channel_algorithm.hpp> // force to use the boostHack version first
-#include <boost/gil/gil_config.hpp>
 #include <boost/gil/typedefs.hpp>
 #include <boost/gil/image.hpp>
 #include <boost/gil/image_view.hpp>
@@ -58,7 +57,7 @@ struct layout_type
  * @return the current type T if it's a floating point type,
  *         else return F
  */
-template<typename T, typename F = boost::gil::bits32f>
+template<typename T, typename F = boost::gil::scoped_channel_value<float, boost::gil::float_point_zero<float>, boost::gil::float_point_one<float>>>
 struct floating_channel_type_t
 {
 	typedef typename boost::mpl::if_< boost::is_floating_point<T>,

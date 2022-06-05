@@ -3,7 +3,7 @@
 	url = https://github.com/edubois/mvp-player.git
 [submodule "tools/sconsProject"]
 	path = tools/sconsProject
-	url = https://github.com/edubois/sconsProject.git
+	url = https://github.com/fwachsmuth/sconsProject.git
 [submodule "libraries/sequenceparser"]
 	path = libraries/sequenceparser
-	url = https://github.com/edubois/sequenceparser.git
+	url = https://github.com/mikrosimage/sequenceparser.git

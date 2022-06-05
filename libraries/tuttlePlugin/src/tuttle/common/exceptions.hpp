@@ -90,7 +90,7 @@ namespace exception {
  * @brief If you catch an error at the top level, you can print this information to the user.
  * @remark User information.
  */
-typedef ::boost::error_info<struct tag_userMessage, ::boost::error_info_sstream> user;
+typedef ::boost::error_info<struct tag_userMessage, std::string> user;
 
 /**
  * @brief This is detailed informations for developpers.
@@ -98,7 +98,7 @@ typedef ::boost::error_info<struct tag_userMessage, ::boost::error_info_sstream>
  * @remark Dev information.
  */
 //typedef ::boost::error_info<struct tag_message,std::string> dev;
-typedef ::boost::error_info<struct tag_devMessage, ::boost::error_info_sstream> dev;
+typedef ::boost::error_info<struct tag_devMessage, std::string> dev;
 //typedef ::boost::error_info_sstream<struct tag_message> dev;
 
 /**
@@ -107,7 +107,7 @@ typedef ::boost::error_info<struct tag_devMessage, ::boost::error_info_sstream> 
  * 
  * @remark Dev information.
  */
-typedef ::boost::error_info<struct tag_backtraceMessage, ::boost::error_info_sstream> backtrace;
+typedef ::boost::error_info<struct tag_backtraceMessage, std::string> backtrace;
 
 /**
  * @brief The ofx error status code.
@@ -223,7 +223,7 @@ struct MissingHostFeature : virtual Common
 	MissingHostFeature( const std::string& feature )
 	{
 		* this << ofxStatus( kOfxStatErrMissingHostFeature );
-		* this << user() + "Missing feature: " + quotes(feature);
+		*this << user( "Missing feature: " + quotes(feature) );
 	}
 };
 

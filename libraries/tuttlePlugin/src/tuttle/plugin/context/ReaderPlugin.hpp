@@ -1,6 +1,7 @@
 #ifndef _TUTTLE_PLUGIN_CONTEXT_READERPLUGIN_HPP_
 #define _TUTTLE_PLUGIN_CONTEXT_READERPLUGIN_HPP_
 
+#include <boost/filesystem/path.hpp>
 #include <boost/gil/channel_algorithm.hpp> // force to use the boostHack version first
 
 #include "ReaderDefinition.hpp"
@@ -34,7 +35,7 @@ public:
 		if( _isSequence )
 		{
 			//TUTTLE_LOG_VAR( TUTTLE_INFO, _filePattern.getAbsoluteFilenameAt( time ) );
-			return _filePattern.getAbsoluteFilenameAt( static_cast<std::ssize_t>(time) );
+			return ( _directory / _filePattern.getFilenameAt( static_cast<std::ssize_t>(time) ) ).string();
 		}
 		else
 		{
@@ -46,7 +47,7 @@ public:
 	std::string getAbsoluteFirstFilename() const
 	{
 		if( _isSequence )
-			return _filePattern.getAbsoluteFirstFilename();
+			return ( _directory / _filePattern.getFirstFilename() ).string();
 		else
 			return _paramFilepath->getValue();
 	}
@@ -96,6 +97,7 @@ public:
 
 protected:
 	virtual inline bool varyOnTime() const { return _isSequence; }
+	void updateSequence();
 
 public:
 	OFX::Clip*           _clipDst;        ///< Destination image clip
@@ -109,6 +111,7 @@ public:
 private:
 	bool _isSequence;
 	sequenceParser::Sequence _filePattern;            ///< Filename pattern manager
+	boost::filesystem::path _directory;
 };
 
 }

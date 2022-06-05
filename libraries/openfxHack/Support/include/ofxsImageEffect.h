@@ -411,7 +411,7 @@ protected:
     std::map<std::string, std::string> _clipROIPropNames;
     std::map<std::string, std::string> _clipFrameRangePropNames;
 
-    std::auto_ptr<EffectInteractWrap> _overlayDescriptor;
+    std::unique_ptr<EffectInteractWrap> _overlayDescriptor;
 
 public:
     /** @brief ctor */

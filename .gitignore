@@ -5,3 +5,4 @@ dist
 *.log
 default.sconf
 /build/
+/extern

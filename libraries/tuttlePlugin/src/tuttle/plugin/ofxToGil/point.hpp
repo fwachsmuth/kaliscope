@@ -3,29 +3,29 @@
 
 #include <ofxCore.h>
 
-#include <boost/gil/utilities.hpp>
+#include <boost/gil/point.hpp>
 
 namespace tuttle {
 namespace plugin {
 
-inline boost::gil::point2<double> ofxToGil( const OfxPointD& p )
+inline boost::gil::point<double> ofxToGil( const OfxPointD& p )
 {
-	return boost::gil::point2<double>( p.x, p.y );
+	return boost::gil::point<double>( p.x, p.y );
 }
 
-inline OfxPointD gilToOfx( const boost::gil::point2<double>& p )
+inline OfxPointD gilToOfx( const boost::gil::point<double>& p )
 {
 	OfxPointD r = { p.x, p.y };
 
 	return r;
 }
 
-inline boost::gil::point2<int> ofxToGil( const OfxPointI& p )
+inline boost::gil::point<int> ofxToGil( const OfxPointI& p )
 {
-	return boost::gil::point2<int>( p.x, p.y );
+	return boost::gil::point<int>( p.x, p.y );
 }
 
-inline OfxPointI gilToOfx( const boost::gil::point2<int>& p )
+inline OfxPointI gilToOfx( const boost::gil::point<int>& p )
 {
 	OfxPointI r = { p.x, p.y };
 

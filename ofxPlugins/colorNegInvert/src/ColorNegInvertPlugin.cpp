@@ -9,7 +9,7 @@
 #include "ColorNegInvertDefinitions.hpp"
 
 #include <boost/format.hpp>
-#include <boost/gil/gil_all.hpp>
+#include <boost/gil.hpp>
 
 namespace tuttle {
 namespace plugin {

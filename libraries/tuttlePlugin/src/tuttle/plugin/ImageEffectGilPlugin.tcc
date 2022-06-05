@@ -1,5 +1,6 @@
+#include <boost/gil.hpp>
 
-#include <boost/gil/gil_all.hpp>
+typedef boost::gil::scoped_channel_value<float, boost::gil::float_point_zero<float>, boost::gil::float_point_one<float>> bits32f;
 
 namespace tuttle {
 namespace plugin {
@@ -27,24 +28,24 @@ void doGilRender( Plugin& plugin, const OFX::RenderArguments& args, const OFX::E
 	{
 		case OFX::eBitDepthUByte:
 		{
-			doGilRender<Process, planar, Layout, boost::gil::bits8>( plugin, args );
+			doGilRender<Process, planar, Layout, uint8_t>( plugin, args );
 			return;
 		}
 		case OFX::eBitDepthUShort:
 		{
-			doGilRender<Process, planar, Layout, boost::gil::bits16>( plugin, args );
+			doGilRender<Process, planar, Layout, uint16_t>( plugin, args );
 			return;
 		}
 		case OFX::eBitDepthFloat:
 		{
-			doGilRender<Process, planar, Layout, boost::gil::bits32f>( plugin, args );
+			doGilRender<Process, planar, Layout, bits32f>( plugin, args );
 			return;
 		}
 		case OFX::eBitDepthCustom:
 		case OFX::eBitDepthNone:
 		{
 			BOOST_THROW_EXCEPTION( exception::Unsupported()
-				<< exception::user() + "Bit depth (" + mapBitDepthEnumToString(bitDepth) + ") not recognized by the plugin." );
+				<< exception::user( "Bit depth (" + mapBitDepthEnumToString(bitDepth) + ") not recognized by the plugin." ) );
 		}
 	}
 	BOOST_THROW_EXCEPTION( exception::Unknown() );
@@ -76,7 +77,7 @@ void doGilRender( Plugin& plugin, const OFX::RenderArguments& args, const OFX::E
 		case OFX::ePixelComponentNone:
 		{
 			BOOST_THROW_EXCEPTION( exception::Unsupported()
-				<< exception::user() + "Pixel component (" + mapPixelComponentEnumToString(component) + ") not supported by the plugin." );
+				<< exception::user( "Pixel component (" + mapPixelComponentEnumToString(component) + ") not supported by the plugin." ) );
 		}
 	}
 	BOOST_THROW_EXCEPTION( exception::Unknown() );
@@ -131,24 +132,24 @@ void doGilRender2( Plugin& plugin, const OFX::RenderArguments& args, const OFX::
 	{
 		case OFX::eBitDepthUByte:
 		{
-			doGilRender2<Process, sPlanar, SLayout, SBits, dPlanar, DLayout, boost::gil::bits8>( plugin, args );
+			doGilRender2<Process, sPlanar, SLayout, SBits, dPlanar, DLayout, uint8_t>( plugin, args );
 			return;
 		}
 		case OFX::eBitDepthUShort:
 		{
-			doGilRender2<Process, sPlanar, SLayout, SBits, dPlanar, DLayout, boost::gil::bits16>( plugin, args );
+			doGilRender2<Process, sPlanar, SLayout, SBits, dPlanar, DLayout, uint16_t>( plugin, args );
 			return;
 		}
 		case OFX::eBitDepthFloat:
 		{
-			doGilRender2<Process, sPlanar, SLayout, SBits, dPlanar, DLayout, boost::gil::bits32f>( plugin, args );
+			doGilRender2<Process, sPlanar, SLayout, SBits, dPlanar, DLayout, bits32f>( plugin, args );
 			return;
 		}
 		case OFX::eBitDepthCustom:
 		case OFX::eBitDepthNone:
 		{
 			BOOST_THROW_EXCEPTION( exception::Unsupported()
-				<< exception::user() + "Bit depth (" + mapBitDepthEnumToString(dBitDepth) + ") not recognized by the plugin." );
+				<< exception::user( "Bit depth (" + mapBitDepthEnumToString(dBitDepth) + ") not recognized by the plugin." ) );
 		}
 	}
 	BOOST_THROW_EXCEPTION( exception::Unknown() );
@@ -181,7 +182,7 @@ void doGilRender2( Plugin& plugin, const OFX::RenderArguments& args, const OFX::
 		case OFX::ePixelComponentNone:
 		{
 			BOOST_THROW_EXCEPTION( exception::Unsupported()
-				<< exception::user() + "Pixel component (" + mapPixelComponentEnumToString(dComponent) + ") not supported by the plugin." );
+				<< exception::user( "Pixel component (" + mapPixelComponentEnumToString(dComponent) + ") not supported by the plugin." ) );
 		}
 	}
 	BOOST_THROW_EXCEPTION( exception::Unknown() );
@@ -211,24 +212,24 @@ void doGilRender2( Plugin& plugin, const OFX::RenderArguments& args, const OFX::
 	{
 		case OFX::eBitDepthUByte:
 		{
-			doGilRender2<Process, sPlanar, SLayout, boost::gil::bits8>( plugin, args, dPlanar, dComponent, dBitDepth );
+			doGilRender2<Process, sPlanar, SLayout, uint8_t>( plugin, args, dPlanar, dComponent, dBitDepth );
 			return;
 		}
 		case OFX::eBitDepthUShort:
 		{
-			doGilRender2<Process, sPlanar, SLayout, boost::gil::bits16>( plugin, args, dPlanar, dComponent, dBitDepth );
+			doGilRender2<Process, sPlanar, SLayout, uint16_t>( plugin, args, dPlanar, dComponent, dBitDepth );
 			return;
 		}
 		case OFX::eBitDepthFloat:
 		{
-			doGilRender2<Process, sPlanar, SLayout, boost::gil::bits32f>( plugin, args, dPlanar, dComponent, dBitDepth );
+			doGilRender2<Process, sPlanar, SLayout, bits32f>( plugin, args, dPlanar, dComponent, dBitDepth );
 			return;
 		}
 		case OFX::eBitDepthCustom:
 		case OFX::eBitDepthNone:
 		{
 			BOOST_THROW_EXCEPTION( exception::Unsupported()
-				<< exception::user() + "Bit depth (" + mapBitDepthEnumToString(sBitDepth) + ") not recognized by the plugin." );
+				<< exception::user( "Bit depth (" + mapBitDepthEnumToString(sBitDepth) + ") not recognized by the plugin." ) );
 		}
 	}
 	BOOST_THROW_EXCEPTION( exception::Unknown() );
@@ -260,7 +261,7 @@ void doGilRender2( Plugin& plugin, const OFX::RenderArguments& args, const OFX::
 		case OFX::ePixelComponentNone:
 		{
 			BOOST_THROW_EXCEPTION( exception::Unsupported()
-				<< exception::user() + "Pixel component (" + mapPixelComponentEnumToString(sComponent) + ") not supported by the plugin." );
+				<< exception::user( "Pixel component (" + mapPixelComponentEnumToString(sComponent) + ") not supported by the plugin." ) );
 		}
 	}
 }

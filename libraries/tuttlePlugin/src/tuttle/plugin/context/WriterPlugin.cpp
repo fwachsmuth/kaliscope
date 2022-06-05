@@ -4,6 +4,7 @@
 
 #include <boost/filesystem/operations.hpp>
 #include <boost/scoped_ptr.hpp>
+#include <filesystem.hpp>
 
 #include <cstdio>
 
@@ -27,7 +28,7 @@ WriterPlugin::WriterPlugin( OfxImageEffectHandle handle )
 	_paramPremult = fetchBooleanParam( kParamPremultiplied );
 	_paramExistingFile = fetchChoiceParam( kParamWriterExistingFile );
 	_paramForceNewRender = fetchIntParam( kParamWriterForceNewRender );
-	_isSequence = _filePattern.initFromDetection( _paramFilepath->getValue( ) );
+	updateSequence();
 }
 
 WriterPlugin::~WriterPlugin( )
@@ -38,7 +39,7 @@ void WriterPlugin::changedParam( const OFX::InstanceChangedArgs& args, const std
 {
 	if( paramName == kTuttlePluginFilename )
 	{
-		_isSequence = _filePattern.initFromDetection( _paramFilepath->getValue( ) );
+		updateSequence();
 	}
 	else if( paramName == kParamWriterRender )
 	{
@@ -157,6 +158,17 @@ void WriterPlugin::render( const OFX::RenderArguments& args )
 				memcpy( dataDstPtr, dataSrcPtr, rowBytesToCopy );
 			}
 		}
+	}
+}
+
+void WriterPlugin::updateSequence()
+{
+	std::string path = _paramFilepath->getValue();
+	_isSequence      = sequenceParser::browseSequence( _filePattern, path );
+	_directory       = bfs::path( path ).parent_path();
+	if( _directory.empty() ) // relative path
+	{
+		_directory = boost::filesystem::current_path();
 	}
 }
 

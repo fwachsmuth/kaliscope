@@ -268,7 +268,7 @@ protected:
     ValueParamDescriptor( const std::string& name, ParamTypeEnum type, OfxPropertySetHandle props );
 
     friend class ParamSetDescriptor;
-    std::auto_ptr<ParamInteractWrap> _interact;
+    std::unique_ptr<ParamInteractWrap> _interact;
 
 public:
     /** @brief dtor */
@@ -689,7 +689,7 @@ protected:
 
     OfxParamHandle _ofxParamHandle;
     ParamSetDescriptor* _paramSet;
-    std::auto_ptr<ParamInteractWrap> _interact;
+    std::unique_ptr<ParamInteractWrap> _interact;
 
     // so it can make one
     friend class ParamSetDescriptor;

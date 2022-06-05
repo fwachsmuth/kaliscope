@@ -57,6 +57,7 @@ template <>
 struct default_color_converter_impl<rgb_t, terry::color::layout::yuv_t> {
     template <typename P1, typename P2>
     void operator()(const P1& src, P2& dst) const {
+        typedef boost::gil::scoped_channel_value<float, boost::gil::float_point_zero<float>, boost::gil::float_point_one<float>> bits32f;
         typedef typename channel_type<P1>::type T1;
         const double r = ( get_color( src, red_t() ) - double( channel_traits<T1>::min_value() ) ) / ( double( channel_traits<T1>::max_value() - double( channel_traits<T1>::min_value() ) ) );
         const double g = ( get_color( src, green_t() ) - double( channel_traits<T1>::min_value() ) ) / ( double( channel_traits<T1>::max_value() - double( channel_traits<T1>::min_value() ) ) );
@@ -79,6 +80,7 @@ template <>
 struct default_color_converter_impl<rgba_t, yuv_t> {
     template <typename P1, typename P2>
     void operator()(const P1& src, P2& dst) const {
+        typedef boost::gil::scoped_channel_value<float, boost::gil::float_point_zero<float>, boost::gil::float_point_one<float>> bits32f;
         typedef typename channel_type<P1>::type T1;
         const double alphaFactor = ( get_color( src, alpha_t() ) - double( channel_traits<T1>::min_value() ) ) / ( double( channel_traits<T1>::max_value() - double( channel_traits<T1>::min_value() ) ) );
         const double r = ( get_color( src, red_t() ) - double( channel_traits<T1>::min_value() ) ) / ( double( channel_traits<T1>::max_value() - double( channel_traits<T1>::min_value() ) ) );
@@ -103,6 +105,7 @@ template <>
 struct default_color_converter_impl<terry::color::layout::yuv_t, rgb_t> {
     template <typename P1, typename P2>
     void operator()(const P1& src, P2& dst) const {
+        typedef boost::gil::scoped_channel_value<float, boost::gil::float_point_zero<float>, boost::gil::float_point_one<float>> bits32f;
         using namespace terry::color::layout;
         typedef typename channel_type<P1>::type T1;
         // y, u, v must be in [0;1]
@@ -125,6 +128,7 @@ template <>
 struct default_color_converter_impl<terry::color::layout::yuv_t, rgba_t> {
     template <typename P1, typename P2>
     void operator()(const P1& src, P2& dst) const {
+        typedef boost::gil::scoped_channel_value<float, boost::gil::float_point_zero<float>, boost::gil::float_point_one<float>> bits32f;
         typedef typename channel_type<P1>::type T1;
         // y, u, v must be in [0;1]
         const double y = get_color( src, y_t() );

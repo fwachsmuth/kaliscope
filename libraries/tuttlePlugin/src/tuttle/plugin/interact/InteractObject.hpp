@@ -4,7 +4,7 @@
 #include "interact.hpp"
 #include <ofxsInteract.h>
 #include <boost/gil/utilities.hpp>
-
+#include <boost/gil/point.hpp>
 #include <boost/math/special_functions/pow.hpp>
 
 namespace tuttle {
@@ -12,7 +12,7 @@ namespace plugin {
 namespace interact {
 
 typedef double Scalar;
-typedef boost::gil::point2<Scalar> Point2;
+typedef boost::gil::point<Scalar> Point2;
 
 /**
  * @brief A base class for all object to use in interact or overlay.

@@ -2659,7 +2659,7 @@ OfxStatus mainEntryStr( const char*          actionRaw,
 		[OFX::tag_ofxStatus*] = kOfxStatErrValue
 		[boost::errinfo_file_name_*] = /datas/tmp/master32secsh01.0014.dpx
 		*/
-		if( const boost::error_info_sstream* const messageException = boost::get_error_info< tuttle::exception::user >(e) )
+		if( const std::string* const messageException = boost::get_error_info< tuttle::exception::user >(e) )
 		{
 			std::cerr << "Error: " << *messageException << std::endl;
 		}
@@ -2774,7 +2774,7 @@ void setHost( OfxHost* host )
 
 OfxPlugInfo generatePlugInfo( PluginFactory* factory )
 {
-	std::auto_ptr<OfxPlugin> ofxPlugin( new OfxPlugin() );
+	std::unique_ptr<OfxPlugin> ofxPlugin( new OfxPlugin() );
 	ofxPlugin->pluginApi          = kOfxImageEffectPluginApi;
 	ofxPlugin->apiVersion         = kOfxImageEffectPluginApiVersion;
 	ofxPlugin->pluginIdentifier   = factory->getID().c_str();

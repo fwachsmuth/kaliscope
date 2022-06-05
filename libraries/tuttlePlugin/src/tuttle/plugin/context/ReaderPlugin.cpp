@@ -1,5 +1,8 @@
 #include "ReaderPlugin.hpp"
 
+#include <boost/filesystem/operations.hpp>
+#include <filesystem.hpp>
+
 namespace tuttle {
 namespace plugin {
 
@@ -10,9 +13,9 @@ ReaderPlugin::ReaderPlugin( OfxImageEffectHandle handle )
 {
 	_clipDst       = fetchClip( kOfxImageEffectOutputClipName );
 	_paramFilepath = fetchStringParam( kTuttlePluginFilename );
-	_isSequence    = _filePattern.initFromDetection( _paramFilepath->getValue() );
 	_paramBitDepth = fetchChoiceParam( kTuttlePluginBitDepth );
 	_paramChannel  = fetchChoiceParam( kTuttlePluginChannel );
+	updateSequence();
 }
 
 ReaderPlugin::~ReaderPlugin()
@@ -22,7 +25,7 @@ void ReaderPlugin::changedParam( const OFX::InstanceChangedArgs& args, const std
 {
 	if( paramName == kTuttlePluginFilename )
 	{
-		_isSequence = _filePattern.initFromDetection( _paramFilepath->getValue() );
+		updateSequence();
 	}
 }
 
@@ -88,6 +91,17 @@ void ReaderPlugin::render( const OFX::RenderArguments& args )
 {
 	std::string filename =  getAbsoluteFilenameAt( args.time );
 	TUTTLE_LOG_INFO( "        >-- " << filename );
+}
+
+void ReaderPlugin::updateSequence()
+{
+	std::string path = _paramFilepath->getValue();
+	_isSequence      = sequenceParser::browseSequence( _filePattern, path );
+	_directory       = bfs::path( path ).parent_path();
+	if( _directory.empty() ) // relative path
+	{
+		_directory = bfs::current_path();
+	}
 }
 
 }

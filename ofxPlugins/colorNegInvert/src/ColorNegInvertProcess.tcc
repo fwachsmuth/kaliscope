@@ -6,8 +6,10 @@
 #include "ColorNegInvertAlgorithm.hpp"
 #include "ColorNegInvertPlugin.hpp"
 
-#include <boost/gil/gil_all.hpp>
+#include <boost/gil.hpp>
 #include <terry/colorspace/layout/all.hpp>
+
+typedef boost::gil::scoped_channel_value<float, boost::gil::float_point_zero<float>, boost::gil::float_point_one<float>> bits32f;
 
 namespace tuttle {
 namespace plugin {
@@ -49,7 +51,6 @@ void ColorNegInvertProcess<View>::multiThreadProcessImages( const OfxRectI& proc
         using namespace terry::color::layout;
         typedef pixel<bits32f, boost::gil::layout< terry::color::layout::yuv_t> > YUVWorkPixT;
         YUVWorkPixT wpix;
-        typedef typename channel_type<YUVWorkPixT>::type YUVValueT;
         rgb32f_pixel_t rgbRefFilterPix( params.fRedFilterColor, params.fGreenFilterColor, params.fBlueFilterColor );
         YUVWorkPixT yuvRefFilterPix;
         color_convert( rgbRefFilterPix, yuvRefFilterPix );

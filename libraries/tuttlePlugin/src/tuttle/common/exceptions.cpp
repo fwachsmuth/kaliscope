@@ -6,12 +6,12 @@ namespace exception {
 std::string format_exception_message( const ::boost::exception& e )
 {
 	std::ostringstream tmp;
-	if( const ::boost::error_info_sstream* m = ::boost::get_error_info<tuttle::exception::user>(e) )
+	if( const std::string* m = ::boost::get_error_info<tuttle::exception::user>(e) )
 	{
 		tmp << *m;
 		return tmp.str();
 	}
-	else if( const ::boost::error_info_sstream* m = boost::get_error_info<tuttle::exception::dev>(e) )
+	else if( const std::string* m = boost::get_error_info<tuttle::exception::dev>(e) )
 	{
 		tmp << *m;
 		return tmp.str();
@@ -24,7 +24,7 @@ std::string format_exception_info( const ::boost::exception& e )
 	std::ostringstream tmp;
 	if( ::boost::get_error_info<tuttle::exception::user>(e) )
 	{
-		if( const ::boost::error_info_sstream* m = ::boost::get_error_info<tuttle::exception::dev>(e) )
+		if( const std::string* m = ::boost::get_error_info<tuttle::exception::dev>(e) )
 		{
 			tmp << " * Advanced message: " << *m << std::endl;
 		}
