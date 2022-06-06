@@ -1,3 +1,11 @@
+/////////////////////////// What's new in 1.1.0 ////////////////////////////////
+
+Since the Plugin didn't work on M1 Macs, I hence forked the project and patched 
+it until I could compile a working universal binary that now also works on M1 Macs.
+
+See "Releases" to get 1.1.0 bits that work on modern hardware :)
+
+
 /////////////////////////// INTRODUCTION ///////////////////////////////////////
 
 * KALISCOPE is a set of tools and plugins to create a professional pipeline for
