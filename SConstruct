@@ -111,7 +111,7 @@ class KaliscopeMatchProject( SConsProject ):
                             sources=sources, dirs=dirs, libraries=libraries, includes=includes,
                             env=env, localEnvFlags=localEnvFlags, replaceLocalEnvFlags=replaceLocalEnvFlags, externEnvFlags=externEnvFlags, globalEnvFlags=globalEnvFlags,
                             dependencies=dependencies, installAs=self.getOutputOfxPlugin(pluginFilename), install=install,
-                            public=False )
+                            public=False, loadableModule=True )
 
             envLocal = self.env
 

@@ -1,5 +1,8 @@
 import os
+import subprocess
 import sys
+
+sdk_path = subprocess.getoutput("xcrun --show-sdk-path")
 
 windows = os.name.lower() == "nt" and sys.platform.lower().startswith("win")
 macos = sys.platform.lower().startswith("darwin")
@@ -37,7 +40,13 @@ libdir_tuttleHost = join(extern,'TuttleOfx/build/libraries/tuttle/')
 
 compiler="clang"
 CXXFLAGS=[
-    '-Wno-deprecated-register', '-ftemplate-depth=256', '-std=c++11', '-stdlib=libc++', '-isysroot/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk',
+    '-Wno-deprecated-register', '-ftemplate-depth=256', '-std=c++11', '-stdlib=libc++', f'-isysroot{sdk_path}',
+    # On M1:
+    # '-arch', 'arm64', '-arch', 'x86_64',
     '-DGL_SILENCE_DEPRECATION', # FIXME: Use new interface
 ]
-LINKFLAGS=['-stdlib=libc++','-Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk']
+LINKFLAGS=[
+    '-stdlib=libc++',f'-Wl,-syslibroot,{sdk_path}',
+    # On M1:
+    # '-arch', 'arm64', '-arch', 'x86_64',
+]

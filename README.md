@@ -52,16 +52,13 @@ git submodule update -i
 ```
 This should bring tools/sconsProject and mvp-player submodules
 
-Now, it's time to edit default.sconf according to your configuration.
-In the default configuration, I made a parent directory 3rdParties where I put
+Now, it's time to edit `default.sconf` according to your configuration.
+In the default configuration, I made a subdirectory `extern` where I put
 my 3rd party libraries. To change your external libraries base dir, 
 edit the variable extern in this file (default.sconf).
 
-If you are using Mac, adapt the last lines according to your
-XCode configuration.
-
-If you are not using Mac, remove the lines after '# Mac only'
-
+To compile for an M1 Mac, comment out the corresponding lines at the bottom.
+You might get a warning from `ld` that the boost archives were not compiled for x86_64, but you can ignore it.
 
 ## Running
 
@@ -72,7 +69,7 @@ When you are ready, enter:
 This should build an executable kaliscope_qt showing a recorder dialog, where you can 
 control your telecinema.
 
-Edit init.ksh according to your configuration, then source it and execute the binary file.
+Edit `init.sh` according to your configuration, then source it and execute the binary file.
 
 You only have to connect your Hall Sensor to GPIO INPUT 1 of the ximea device.
 The Hall sensor must be activated by a magnet each time a film frame has to be captured.
@@ -122,9 +119,9 @@ This plugin helps in removing colored masks that can appear on you films negativ
 
 ```scons colorNegInvert```
 
-### 
-
 ## Packaging of the plugins on MacOS
+
+__Note:__ This only needs to be done if you _dynamically_ linked against boost.
 
 To package ofxPlugins on MacOS, you have bundle the dylibs and tell the ofx plugin and dylib to use the one you provide.
 
